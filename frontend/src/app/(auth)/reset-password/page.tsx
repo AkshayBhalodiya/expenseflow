@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ShieldCheck, Loader2, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AuthCard } from '@/components/auth/auth-card';
+import { AUTH_ICON_CLASS, AUTH_ICON_WRAP_CLASS, AUTH_LINK_CLASS } from '@/components/auth/auth-styles';
 import { FormField } from '@/components/auth/form-field';
 import { PasswordInput } from '@/components/auth/password-input';
 import { api } from '@/lib/api';
@@ -39,14 +40,14 @@ function ResetPasswordForm() {
       title="Set new password"
       description={token ? 'Choose a strong password for your account' : 'Invalid or missing reset link'}
       icon={
-        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <ShieldCheck className="h-6 w-6 text-primary" />
+        <span className={AUTH_ICON_WRAP_CLASS}>
+          <ShieldCheck className={AUTH_ICON_CLASS} />
         </span>
       }
       footer={
         <Link
           href="/login"
-          className="flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline"
+          className={`flex items-center justify-center gap-2 ${AUTH_LINK_CLASS}`}
         >
           <ArrowLeft className="h-4 w-4" />
           Back to sign in
@@ -55,18 +56,18 @@ function ResetPasswordForm() {
     >
       <form onSubmit={handleSubmit} className="space-y-5">
         {message && (
-          <div className="flex gap-3 rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-700 dark:text-green-400">
+          <div className="flex gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
             <CheckCircle2 className="h-5 w-5 shrink-0" />
             {message}
           </div>
         )}
         {error && (
-          <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
           </div>
         )}
         {!token && (
-          <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-400">
+          <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
             Please use the link from your email to reset your password.
           </div>
         )}
@@ -102,7 +103,7 @@ function ResetPasswordForm() {
 function ResetLoading() {
   return (
     <div className="flex justify-center py-12">
-      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
     </div>
   );
 }

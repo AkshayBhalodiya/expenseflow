@@ -4,8 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { KeyRound, Mail, Loader2, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { AuthCard } from '@/components/auth/auth-card';
+import { AuthInput } from '@/components/auth/auth-input';
+import { AUTH_ICON_CLASS, AUTH_ICON_WRAP_CLASS, AUTH_LINK_CLASS } from '@/components/auth/auth-styles';
 import { FormField } from '@/components/auth/form-field';
 import { api } from '@/lib/api';
 
@@ -43,14 +44,14 @@ export default function ForgotPasswordPage() {
       title="Forgot password?"
       description="No worries — enter your email and we'll send you a reset link"
       icon={
-        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <KeyRound className="h-6 w-6 text-primary" />
+        <span className={AUTH_ICON_WRAP_CLASS}>
+          <KeyRound className={AUTH_ICON_CLASS} />
         </span>
       }
       footer={
         <Link
           href="/login"
-          className="flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline"
+          className={`flex items-center justify-center gap-2 ${AUTH_LINK_CLASS}`}
         >
           <ArrowLeft className="h-4 w-4" />
           Back to sign in
@@ -62,8 +63,8 @@ export default function ForgotPasswordPage() {
           <div
             className={`flex gap-3 rounded-lg border px-4 py-3 text-sm ${
               isSuccess
-                ? 'border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-400'
-                : 'border-destructive/30 bg-destructive/10 text-destructive'
+                ? 'border-green-200 bg-green-50 text-green-700'
+                : 'border-red-200 bg-red-50 text-red-600'
             }`}
           >
             {isSuccess && <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />}
@@ -73,8 +74,8 @@ export default function ForgotPasswordPage() {
 
         <FormField label="Email address" htmlFor="email">
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
+            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <AuthInput
               id="email"
               type="email"
               placeholder="you@example.com"
@@ -100,8 +101,8 @@ export default function ForgotPasswordPage() {
 
         {isSuccess && previewUrl && (
           <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-4 text-sm">
-            <p className="font-medium text-blue-700 dark:text-blue-400 mb-2">Dev: Email sent (test inbox)</p>
-            <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline break-all">
+            <p className="mb-2 font-medium text-blue-700">Dev: Email sent (test inbox)</p>
+            <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="break-all text-blue-600 underline">
               Open email preview
             </a>
           </div>
@@ -109,8 +110,8 @@ export default function ForgotPasswordPage() {
 
         {isSuccess && devResetUrl && !previewUrl && (
           <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 text-sm">
-            <p className="font-medium text-amber-700 dark:text-amber-400 mb-2">Dev: SMTP not configured — use this link:</p>
-            <a href={devResetUrl} className="text-primary underline break-all text-xs">
+            <p className="mb-2 font-medium text-amber-700">Dev: SMTP not configured — use this link:</p>
+            <a href={devResetUrl} className="break-all text-xs text-blue-600 underline">
               {devResetUrl}
             </a>
           </div>

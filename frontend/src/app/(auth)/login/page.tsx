@@ -5,8 +5,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { LogIn, Mail, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { AuthCard } from '@/components/auth/auth-card';
+import { AuthInput } from '@/components/auth/auth-input';
+import {
+  AUTH_FOOTER_CLASS,
+  AUTH_ICON_CLASS,
+  AUTH_ICON_WRAP_CLASS,
+  AUTH_LINK_CLASS,
+} from '@/components/auth/auth-styles';
 import { FormField } from '@/components/auth/form-field';
 import { PasswordInput } from '@/components/auth/password-input';
 import { useAuthStore } from '@/store/authStore';
@@ -34,14 +40,14 @@ export default function LoginPage() {
       title="Welcome back"
       description="Sign in to continue managing your finances"
       icon={
-        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <LogIn className="h-6 w-6 text-primary" />
+        <span className={AUTH_ICON_WRAP_CLASS}>
+          <LogIn className={AUTH_ICON_CLASS} />
         </span>
       }
       footer={
-        <p className="text-center text-sm text-muted-foreground">
+        <p className={AUTH_FOOTER_CLASS}>
           Don&apos;t have an account?{' '}
-          <Link href="/register" className="font-medium text-primary hover:underline">
+          <Link href="/register" className={AUTH_LINK_CLASS}>
             Create account
           </Link>
         </p>
@@ -49,15 +55,15 @@ export default function LoginPage() {
     >
       <form onSubmit={handleSubmit} className="space-y-5">
         {error && (
-          <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
           </div>
         )}
 
         <FormField label="Email address" htmlFor="email">
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
+            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <AuthInput
               id="email"
               type="email"
               placeholder="you@example.com"
@@ -82,7 +88,7 @@ export default function LoginPage() {
         </FormField>
 
         <div className="flex justify-end">
-          <Link href="/forgot-password" className="text-sm font-medium text-primary hover:underline">
+          <Link href="/forgot-password" className={AUTH_LINK_CLASS}>
             Forgot password?
           </Link>
         </div>
