@@ -12,14 +12,19 @@ interface AuthCardProps {
 
 export function AuthCard({ title, description, icon, children, footer, className }: AuthCardProps) {
   return (
-    <div className={cn('rounded-2xl border bg-card p-6 shadow-lg shadow-black/5 sm:p-8', className)}>
+    <div
+      className={cn(
+        'rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-8',
+        className
+      )}
+    >
       <div className="mb-6 space-y-2 text-center sm:text-left">
         {icon && <div className="mb-3 flex justify-center sm:justify-start">{icon}</div>}
-        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-        {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900">{title}</h2>
+        {description && <p className="text-sm text-slate-500">{description}</p>}
       </div>
       {children}
-      {footer && <div className="mt-6 border-t pt-6">{footer}</div>}
+      {footer && <div className="mt-6 border-t border-slate-100 pt-6">{footer}</div>}
     </div>
   );
 }
